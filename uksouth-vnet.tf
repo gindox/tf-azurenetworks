@@ -21,7 +21,7 @@ resource "azurerm_subnet" "uksouth-storage" {
 }
 
 resource "azurerm_subnet" "uksouth-database" {
-    name = "storage"
+    name = "database"
     resource_group_name = var.rg
     virtual_network_name = azurerm_virtual_network.uksouth-vnet.name
     address_prefixes = [ "10.14.44.128/26" ]

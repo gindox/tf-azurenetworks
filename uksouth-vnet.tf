@@ -20,6 +20,21 @@ resource "azurerm_subnet" "uksouth-storage" {
     address_prefixes = [ "10.14.44.16/28" ]
 }
 
+resource "azurerm_subnet" "uksouth-database" {
+    name = "storage"
+    resource_group_name = var.rg
+    virtual_network_name = azurerm_virtual_network.uksouth-vnet.name
+    address_prefixes = [ "10.14.44.128/26" ]
+
+    delegation {
+      name = "delegation"
+
+      service_delegation {
+        name = "Microsoft.Sql/managedInstances"
+      }
+    }
+}
+
 resource "azurerm_route_table" "uksouth-shared-rt" {
   name = "uksouth-shared-rt"
   location = azurerm_virtual_network.uksouth-vnet.location
